@@ -27,7 +27,7 @@ Entregar un portafolio o proyecto con demo funcional más repositorio de código
 ## Estructura de Carpetas y Paquetes del Servicio
 Se utiliza una estructura MVC que conecta las diferentes capas por medio de las interfaces y haciendo uso de la inyección de dependencias.
 
-![Estructura del Proyecto](imagenes/0 estructura del proyecto.png)
+![Estructura del Proyecto](imagenes/0_estructura_del_proyecto.png)
 
 ## Construir y Ejecutar la Imagen
 
@@ -101,27 +101,27 @@ Allí se encuentra toda la documentación del servicio por medio de Swagger y pu
 ### Creación de Autor
 Para empezar, no hay información en la base de datos, entonces recomiendo iniciar con el endpoint de creación, que debería ser el de Autor.
 
-![Crear Usuario](imagenes/1 crear usuario.png)
+![Crear Usuario](imagenes/1_crear_usuario.png)
 
 ### Validar la Respuesta
 Y validamos la respuesta.
 
-![Respuesta Creación Usuario](imagenes/2 respuesta creacion usuario.png)
+![Respuesta Creación Usuario](imagenes/2_respuesta_creacion_usuario.png)
 
 ### Consultar Todos los Autores
 Con el EndPoint `author/getAll` validamos que esté registrado.
 
-![Get All](imagenes/3 getAll.png)
+![Get All](imagenes/3_getAll.png)
 
 ### Registrar Libros al Autor
 Ahora vamos a registrar libros al Autor, utilizando el endpoint `library/create`.
 
-![Library Create](imagenes/4 library create.png)
+![Library Create](imagenes/4_library_create.png)
 
 ### Verificar la Creación del Libro
 Verificamos que se cree el libro y que quede asociado al autor que le asignamos.
 
-![Get All Libraries](imagenes/5 get All libraries.png)
+![Get All Libraries](imagenes/5_get_All_libraries.png)
 
 ### Eliminar un Autor con Libros Asociados
 Por último, si intentamos eliminar un autor que tenga un libro, no nos va a permitir realizar la eliminación.
