@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: library
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/xe
+    username: c##maylcon
+    password: maylcon123
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
