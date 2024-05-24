@@ -1,101 +1,132 @@
-**Prueba backend Java con Spring Boot**
+# Prueba Backend Java con Spring Boot
 
-Realizar una aplicación que permita la administración de libros y sus respectivos autores
-cumpliendo las siguientes condiciones:
+## Descripción
+Realizar una aplicación que permita la administración de libros y sus respectivos autores cumpliendo las siguientes condiciones:
+
 - Backend realizado en PL/SQL.
-- Exponer una capa de servicios mediante API REST (preferiblemente en Java,
-Maven).
-La aplicación debe permitir las operaciones de inserción, edición, consulta y borrado de
-información, tanto de libros y autores validando sus dependencias.
+- Exponer una capa de servicios mediante API REST (preferiblemente en Java, Maven).
+- La aplicación debe permitir las operaciones de inserción, edición, consulta y borrado de información, tanto de libros como de autores, validando sus dependencias.
 
-Entrega de la solución:
-1. Código en Github, especificando en el readme como ejecutar la aplicación y sus
-dependencias.
-2. Imagen o imágenes de contenedores Docker, junto con las instrucciones para
-correr el contenedor.
-Información Adicional
-Entregar un portafolio o proyecto con demo funcional más repositorio de código con el que
-fue construido el proyecto. Lo anterior se requiere para ver la calidad de código de
-proyectos personales que el candidato haya realizado, por un lado, poder consultar el
-código en algún repositorio, y por el otro lado poder ver en ejecución ese código.
+## Entrega de la Solución
+- Código en Github, especificando en el README cómo ejecutar la aplicación y sus dependencias.
+- Imagen o imágenes de contenedores Docker, junto con las instrucciones para correr el contenedor.
 
-**Herramientas y Tecnologias**
+## Información Adicional
+Entregar un portafolio o proyecto con demo funcional más repositorio de código con el que fue construido el proyecto. Esto es necesario para evaluar la calidad del código de proyectos personales que el candidato haya realizado, permitiendo consultar el código en algún repositorio y ver la ejecución de ese código.
 
-Java JDK 17
-apache-maven-3.9.6 
-JPA
-Lombok
-Oracle 21c
-PL/SQL
-Docker
-Git y GitHub
+## Herramientas y Tecnologías
+- Java JDK 17
+- Apache Maven 3.9.6
+- JPA
+- Lombok
+- Oracle 21c
+- PL/SQL
+- Docker
+- Git y GitHub
 
-**Estructura de carpetas y paquetes del servicio**
+## Estructura de Carpetas y Paquetes del Servicio
+Se utiliza una estructura MVC que conecta las diferentes capas por medio de las interfaces y haciendo uso de la inyección de dependencias.
 
-Se realiza estructura MVC que conecta las diferentes capaz por medio de las interfaces y haciendo uso de la inyeccion de dependencias
+![Estructura del Proyecto](../imagenes/0 estructura del proyecto.png)
 
-imagen 0
+## Construir y Ejecutar la Imagen
 
-**Construir y ejecutar la imagen**
+### Pre-requisitos
+Debe contar con los siguientes componentes previamente configurados:
+- Git (opcional)
+- Docker
+- JDK 17
+- Maven
 
-Pre-requisitos
-Debe contar con Git (opcional), Docker, JDK 17 y Maven previamente configurados
+### Instrucciones
 
-Lo primero que vamos a realizar es descargar el proyecto y ubicarlo en una ruta reconocida
-dentro del proyecto vamos a encontrar una carpeta que se llama "Oracle"
-y vamos a realizar los pasos que estan en el READM.md de la carpeta ORACLE.
+1. **Descargar el Proyecto**
+   Descargar el proyecto y ubicarlo en una ruta reconocida.
 
-cuando terminemos de montar la imagen de ORACLE vamos a generar el archivo JAR para la imagen
+2. **Configurar Oracle**
+   Dentro del proyecto, vamos a encontrar una carpeta que se llama `Oracle`. Debemos seguir los pasos descritos en el archivo `README.md` de la carpeta `Oracle` para montar la imagen de Oracle.
 
-- mvn clean install -Dmaven.test.skip=true
+3. **Generar el Archivo JAR**
+   Una vez montada la imagen de Oracle, vamos a generar el archivo JAR para la imagen del servicio backend ejecutando el siguiente comando:
 
-Al finalizar verificamos  en la carpeta TARGET del proyecto que se cree un archivo llamado "library-0.0.1-SNAPSHOT.jar"
+   ```bash
+   mvn clean install -Dmaven.test.skip=true
+   ```
 
-Ahora vamos a construir la imagen Docker del servicio backend con el siguiente comando
+   Al finalizar, verificamos en la carpeta `target` del proyecto que se haya creado un archivo llamado `library-0.0.1-SNAPSHOT.jar`.
 
-- docker build -t library-service .
+4. **Construir la Imagen Docker del Servicio Backend**
+   Vamos a construir la imagen Docker del servicio backend con el siguiente comando:
 
-Luego, verificas que la imagen se cree con el siguiente comando
+   ```bash
+   docker build -t library-service .
+   ```
 
-- docker images
+5. **Verificar la Creación de la Imagen**
+   Verificamos que la imagen se haya creado con el siguiente comando:
 
-Ejecutamos el contenedor a partir de esta imagen
+   ```bash
+   docker images
+   ```
 
-- docker run -d --network=oracle-network --name library-service-container -p 8181:8181 library-service
+6. **Ejecutar el Contenedor**
+   Ejecutamos el contenedor a partir de esta imagen:
 
-Final mente verificamos que el contenedor se este ejecutando
+   ```bash
+   docker run -d --network=oracle-network --name library-service-container -p 8181:8181 library-service
+   ```
 
-docker ps
+7. **Verificar el Contenedor en Ejecución**
+   Finalmente, verificamos que el contenedor se esté ejecutando con el siguiente comando:
 
-NOTA: Al finalizar la revision para dejar los contenedores limpios puedes ejecutar los siguientes comandos en ese orden
-- docker stop library-service-container
-- docker rm library-service-container
+   ```bash
+   docker ps
+   ```
 
-**Funcionamiento**
+### Notas
+Al finalizar la revisión, para dejar los contenedores limpios, puedes ejecutar los siguientes comandos en ese orden:
 
-Despues de tener los contenedores ejecutando vamos a ingresar a la siguiente URL
-- http://localhost:8181/swagger-ui/index.html#/
+```bash
+docker stop library-service-container
+docker rm library-service-container
+```
 
-alli se encuentra toda la documentacion del servicio por medio de Swagger y puedes ejecutar las diferentes consultas.
+## Funcionamiento
+Después de tener los contenedores ejecutando, vamos a ingresar a la siguiente URL:
 
-Para empezar no hay informacion en la BD entonces recomiendo iniciar con el endpoint de creacion, que deberia ser el de Autor.
+[http://localhost:8181/swagger-ui/index.html#/](http://localhost:8181/swagger-ui/index.html#/)
 
-imagen 1
+Allí se encuentra toda la documentación del servicio por medio de Swagger y puedes ejecutar las diferentes consultas.
 
-y validamos la respuesta 
+### Creación de Autor
+Para empezar, no hay información en la base de datos, entonces recomiendo iniciar con el endpoint de creación, que debería ser el de Autor.
 
-imagen 2
+![Crear Usuario](../imagenes/1 crear usuario.png)
 
-Con el EndPoint author/getAll validamos que este registrado
+### Validar la Respuesta
+Y validamos la respuesta.
 
-imagen 3
+![Respuesta Creación Usuario](../imagenes/2 respuesta creacion usuario.png)
 
-Ahora vamos a registrar libros al Autor, entonces vamos a utilizar el endPoint library/create
+### Consultar Todos los Autores
+Con el EndPoint `author/getAll` validamos que esté registrado.
 
-imagen 4
+![Get All](../imagenes/3 getAll.png)
 
-verificamos que se cree el libro y que quede asociado al autor que le asignamos.
+### Registrar Libros al Autor
+Ahora vamos a registrar libros al Autor, utilizando el endpoint `library/create`.
 
-imagen 5
+![Library Create](../imagenes/4 library create.png)
 
-y por ultimo si intentamos eliminar un Autor que tenga un libro, no nos va a permitir realizar la eliminacion
+### Verificar la Creación del Libro
+Verificamos que se cree el libro y que quede asociado al autor que le asignamos.
+
+![Get All Libraries](../imagenes/5 get All libraries.png)
+
+### Eliminar un Autor con Libros Asociados
+Por último, si intentamos eliminar un autor que tenga un libro, no nos va a permitir realizar la eliminación.
+## Sobre el Autor
+Este proyecto fue realizado por:
+##### 🌟 Maylcon Ramirez 
+##### 📧 sanson.saray@gmail.com
+##### 🛠 Especialista en Ingeniería de Software
