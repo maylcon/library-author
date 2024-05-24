@@ -66,7 +66,7 @@ public class AuthorController {
     	if(isEliminated) {
     		return new ResponseEntity<>("Author eliminated successfully", HttpStatus.OK);
     	}
-        return new ResponseEntity<>("Author no exist", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Author can not eliminated", HttpStatus.NOT_FOUND);
     }
     
 }
